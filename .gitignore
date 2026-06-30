@@ -1,0 +1,41 @@
+# Environment & secrets
+.env
+.env.docker
+*.env.local
+
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Playwright
+test-results/
+playwright-report/
+
+# Screenshots hasil monitoring (kalau disimpan lokal, bukan di cloud storage)
+screenshots/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Docker
+.docker/
+
+# OS
+.DS_Store
+Thumbs.db

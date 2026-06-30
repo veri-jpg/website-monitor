@@ -1,0 +1,31 @@
+# --- Web framework & server ---
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+
+# --- Database ---
+sqlalchemy==2.0.35
+psycopg2-binary==2.9.12
+alembic==1.13.3
+
+# --- Validation & settings ---
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+# --- Scheduler ---
+apscheduler==3.10.4
+
+# --- HTTP client untuk pengecekan API/HTTP ---
+httpx==0.27.2
+
+# --- Browser automation untuk pengecekan elemen/login ---
+playwright==1.47.0
+
+# --- Notifikasi ---
+python-telegram-bot==21.6
+discord-webhook==1.3.1
+
+# --- Keamanan (encrypt kredensial login) ---
+cryptography==43.0.1
+
+# --- Environment variables ---
+python-dotenv==1.0.1
