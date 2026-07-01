@@ -8,6 +8,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.core.auth import require_api_key
 from app.database import get_db
 from app.models.website import Website
 from app.models.check_result import CheckResult
@@ -16,7 +17,7 @@ from app.schemas.check_result import CheckResultResponse
 from app.monitors.http_checker import check_http
 from app.monitors.playwright_checker import check_playwright
 
-router = APIRouter(prefix="/websites", tags=["websites"])
+router = APIRouter(prefix="/websites", tags=["websites"], dependencies=[Depends(require_api_key)])
 
 
 @router.post("/", response_model=WebsiteResponse, status_code=201)

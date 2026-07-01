@@ -1,32 +1,14 @@
-FROM python:3.12-slim
+# Official Playwright image: semua system library browser sudah pre-installed,
+# tidak perlu apt-get manual atau --with-deps.
+FROM mcr.microsoft.com/playwright/python:v1.47.0-jammy
 
 WORKDIR /app
-
-# Install dependency sistem untuk Playwright
-RUN apt-get update && apt-get install -y \
-    wget \
-    gnupg \
-    fonts-unifont \
-    fonts-liberation \
-    libnss3 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libdrm2 \
-    libxkbcommon0 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxfixes3 \
-    libxrandr2 \
-    libgbm1 \
-    libasound2 \
-    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install browser binary Playwright tanpa --with-deps
-# (dependency sistem sudah diinstall manual di atas)
+# Install browser binary yang cocok dengan versi playwright yang baru di-pip-install.
+# --with-deps tidak diperlukan karena deps sudah ada di base image.
 RUN playwright install chromium
 
 COPY . .

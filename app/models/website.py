@@ -3,11 +3,12 @@ Model untuk tabel `websites`.
 Menyimpan konfigurasi setiap website yang akan dimonitor.
 """
 
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, JSON
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 
 from app.database import Base
+from app.core.encryption import EncryptedJSON
 
 
 class Website(Base):
@@ -19,7 +20,7 @@ class Website(Base):
     check_method = Column(String, nullable=False, default="http")
     interval_seconds = Column(Integer, nullable=False, default=300)
     selector = Column(String, nullable=True)
-    credentials = Column(JSON, nullable=True)
+    credentials = Column(EncryptedJSON, nullable=True)
     is_active = Column(Boolean, nullable=False, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     last_checked_at = Column(DateTime(timezone=True), nullable=True)

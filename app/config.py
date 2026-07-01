@@ -30,6 +30,10 @@ class Settings(BaseSettings):
 
     # Security
     encryption_key: str
+    # Kalau kosong, autentikasi API dinonaktifkan (cocok untuk development lokal).
+    # Di production isi dengan nilai acak panjang:
+    # python -c "import secrets; print(secrets.token_urlsafe(32))"
+    api_key: str = ""
 
     # Telegram
     telegram_bot_token: str = ""

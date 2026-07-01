@@ -8,11 +8,12 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.core.auth import require_api_key
 from app.database import get_db
 from app.models.check_result import CheckResult
 from app.schemas.check_result import CheckResultResponse
 
-router = APIRouter(prefix="/check-results", tags=["check-results"])
+router = APIRouter(prefix="/check-results", tags=["check-results"], dependencies=[Depends(require_api_key)])
 
 
 @router.get("/", response_model=List[CheckResultResponse])

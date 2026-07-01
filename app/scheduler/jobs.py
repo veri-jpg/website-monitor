@@ -27,7 +27,7 @@ from app.models.notification_rule import NotificationRule
 from app.monitors.http_checker import check_http
 from app.monitors.playwright_checker import check_playwright
 from app.notifiers.telegram import send_telegram_notification
-from app.notifiers.placeholder import send_notification
+from app.notifiers.discord import send_discord_notification
 from app.notifiers.email import send_email_notification
 
 logger = logging.getLogger(__name__)
@@ -119,8 +119,10 @@ async def _dispatch_notification(channel: str, target: str, message: str) -> Non
         await send_telegram_notification(target, message)
     elif channel == "email":
         await send_email_notification(target, message)
+    elif channel == "discord":
+        await send_discord_notification(target, message)
     else:
-        await send_notification("", channel, target, message)
+        logger.warning(f"Channel notifikasi '{channel}' belum didukung - notifikasi dilewati.")
 
 
 async def _handle_status_transition(db, website: Website, final_status: str) -> None:

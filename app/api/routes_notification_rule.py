@@ -8,6 +8,7 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.core.auth import require_api_key
 from app.database import get_db
 from app.models.notification_rule import NotificationRule
 from app.models.website import Website
@@ -17,7 +18,7 @@ from app.schemas.notification_rule import (
     NotificationRuleResponse,
 )
 
-router = APIRouter(prefix="/notification-rules", tags=["notification-rules"])
+router = APIRouter(prefix="/notification-rules", tags=["notification-rules"], dependencies=[Depends(require_api_key)])
 
 
 @router.post("/", response_model=NotificationRuleResponse, status_code=201)
