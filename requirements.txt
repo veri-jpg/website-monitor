@@ -29,3 +29,7 @@ cryptography==43.0.1
 
 # --- Environment variables ---
 python-dotenv==1.0.1
+
+# --- Web UI (Jinja2 templates + form parsing) ---
+jinja2==3.1.4
+python-multipart==0.0.12

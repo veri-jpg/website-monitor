@@ -29,6 +29,7 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 from app.api.routes_website import router as website_router
 from app.api.routes_check_result import router as check_result_router
 from app.api.routes_notification_rule import router as notification_rule_router
+from app.api.routes_ui import router as ui_router
 from app.scheduler.scheduler import start_scheduler, shutdown_scheduler
 from app.database import SessionLocal
 
@@ -74,12 +75,13 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+app.include_router(ui_router)
 app.include_router(website_router)
 app.include_router(check_result_router)
 app.include_router(notification_rule_router)
 
 
-@app.get("/")
-def root():
-    """Health check sederhana - memastikan aplikasi hidup."""
+@app.get("/health")
+def health():
+    """Health check JSON endpoint."""
     return {"status": "ok", "message": "Website Monitoring Platform is running"}
